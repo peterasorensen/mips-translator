@@ -242,8 +242,8 @@ int write_mem(uint8_t opcode, FILE* output, char** args, size_t num_args) {
     return 0;
 }
 
-/* Complete the functiion below. You are given an the address in which you
-   are branching from (src_addr), as well as the address in which you are branching to (dest_addr),
+/* Complete the functiion below. You are given an the address of the current 
+   instruction (src_addr), as well as the address in which you are branching to (dest_addr),
    and you should return whether or not it is possible to branch from src_addr to dest_addr.
 
    HINT: The constant defined at the top of this file may be useful.
