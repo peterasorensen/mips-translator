@@ -1,11 +1,6 @@
-lwb $t0 99($t1)
-lwb $t0 -99($t1)
-lwb $t0 0xB0BACAFE($t1)
-swb $t0 99($t1)
-swb $t0 0xB0BACAFE($t1)
-
-sos $t0 $a1 $0
-rsf $t0 $a1 $0
-
-sos $0 $0 $0
-sos $0 $0 $0
+li $t0, 0x1234567
+pi $s0, $t1, $t3
+neg $t2, $t0
+mult $s0, $t1
+mfhilo $s1, $s2
+neg $a0, $s0

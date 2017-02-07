@@ -48,25 +48,6 @@ int check_lines_equal(char **arr, int num) {
  *  Test cases for translate_utils.c 
  ****************************************/
 
-void test_translate_reg() {
-    CU_ASSERT_EQUAL(translate_reg("$0"), 0);
-    CU_ASSERT_EQUAL(translate_reg("$at"), 1);
-    CU_ASSERT_EQUAL(translate_reg("$v0"), 2);
-    CU_ASSERT_EQUAL(translate_reg("$a0"), 4);
-    CU_ASSERT_EQUAL(translate_reg("$a1"), 5);
-    CU_ASSERT_EQUAL(translate_reg("$a2"), 6);
-    CU_ASSERT_EQUAL(translate_reg("$a3"), 7);
-    CU_ASSERT_EQUAL(translate_reg("$t0"), 8);
-    CU_ASSERT_EQUAL(translate_reg("$t1"), 9);
-    CU_ASSERT_EQUAL(translate_reg("$t2"), 10);
-    CU_ASSERT_EQUAL(translate_reg("$t3"), 11);
-    CU_ASSERT_EQUAL(translate_reg("$s0"), 16);
-    CU_ASSERT_EQUAL(translate_reg("$s1"), 17);
-    CU_ASSERT_EQUAL(translate_reg("$3"), -1);
-    CU_ASSERT_EQUAL(translate_reg("asdf"), -1);
-    CU_ASSERT_EQUAL(translate_reg("hey there"), -1);
-}
-
 void test_translate_num() {
     long int output;
 
@@ -167,9 +148,6 @@ int main(int argc, char** argv) {
     /* Suite 1 */
     pSuite1 = CU_add_suite("Testing translate_utils.c", NULL, NULL);
     if (!pSuite1) {
-        goto exit;
-    }
-    if (!CU_add_test(pSuite1, "test_translate_reg", test_translate_reg)) {
         goto exit;
     }
     if (!CU_add_test(pSuite1, "test_translate_num", test_translate_num)) {

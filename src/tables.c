@@ -88,11 +88,11 @@ static char* create_copy_of_str(const char* str) {
 
    Otherwise, you should store the symbol name and address and return 0.
 
-   Hint: get_addr_for_symbol() should be used.
+   Hint: The functions get_addr_for_symbol() and create_copy_of_str() may be useful.
  */
 int add_to_table(SymbolTable* table, const char* name, uint32_t addr) {
     /* YOUR CODE HERE */
-    return -1;
+    return 0;
 }
 
 /* Returns the address (byte offset) of the given symbol. If a symbol with name

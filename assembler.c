@@ -150,12 +150,16 @@ int pass_one(FILE* input, FILE* output, SymbolTable* symtbl) {
         // Ignore comments
         skip_comment(buf);
 
-        // Scan for the instruction name
-    	char* token = strtok(buf, IGNORE_CHARS);
+        // Scan for the instruction name. If no name is found, then
+        // move to the next line.
+	char *name = strtok(buf, IGNORE_CHARS);
 
-        // Scan for arguments
+        // Handle Labels. If a label is found, get the next token.
+
+        // Scan for arguments. On error, continue to the next line.
         char* args[MAX_ARGS];
         int num_args = 0;
+	
 
     	// Checks to see if there were any errors when writing instructions
         unsigned int lines_written = write_pass_one(output, token, args, num_args);
@@ -165,7 +169,7 @@ int pass_one(FILE* input, FILE* output, SymbolTable* symtbl) {
         }
         byte_offset += lines_written * 4;
     }
-    return -1;
+    return ret_code;
 }
 
 /* Reads an intermediate file and translates it into machine code. You may assume:
@@ -178,7 +182,6 @@ int pass_one(FILE* input, FILE* output, SymbolTable* symtbl) {
    If an error is reached, DO NOT EXIT the function. Keep translating the rest of
    the document, and at the end, return -1. Return 0 if no errors were encountered. */
 int pass_two(FILE *input, FILE* output, SymbolTable* symtbl, SymbolTable* reltbl) {
-    /* YOUR CODE HERE */
 
     /* Since we pass this buffer to strtok(), the characters in this buffer will
        GET CLOBBERED. */
@@ -195,7 +198,7 @@ int pass_two(FILE *input, FILE* output, SymbolTable* symtbl, SymbolTable* reltbl
         /* Next, use strtok() to scan for next character.*/
         char* name = strtok(buf, IGNORE_CHARS);
 
-        // Error checking?
+        // Check to see if name if a name was found. If not, move to the next line
 
         /* Parse for instruction arguments. You should use strtok() to tokenize
            the rest of the line. Extra arguments should be filtered out in pass_one(),
@@ -203,16 +206,13 @@ int pass_two(FILE *input, FILE* output, SymbolTable* symtbl, SymbolTable* reltbl
         char* args[MAX_ARGS];
         int num_args = 0;
 
-
         /* Use translate_inst() to translate the instruction and write to output file.
            If an error occurs, the instruction will not be written and you should call
-           raise_inst_error(). */
-
-        int num = 0;
+           raise_inst_error(). If there is no error, then make sure to increment the byte offset  */
     }
     /* Repeat until no more characters are left */
 
-    return -1;
+    return ret_code;
 }
 
 /*******************************

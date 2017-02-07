@@ -1,6 +1,7 @@
 addiu $t0, $t1, 1000
 addiu $t0, $t1, -56
 ori $t3, $a0, 30000
+xori $t3, $a0, 0x9076
 ori $t3, $a0, 0xD
 lui $a0, 31
 lui $a3, 0x3F3F

@@ -23,15 +23,11 @@ const int TWO_POW_SEVENTEEN = 131072;    // 2^17
 
    Also for li:
     - make sure that the number is representable by 32 bits. (Hint: the number
-        can be both signed or unsigned).
+        can be both signed or unsigned). You may find the translate_num() function
+        you implemented earlier to be useful here.
     - if the immediate can fit in the imm field of an addiu instruction, then
         expand li into a single addiu instruction. Otherwise, expand it into
         a lui-ori pair.
-
-   The above should be helpful for you to implement lwb/swb.
-
-   For sos/rsf, remember to skip the the dummy registers ($zero). If all the
-   registers are dummy registers, then skip that cycle (by output "addu $0 $0 $0").
 
    MARS has slightly different translation rules for li, and it allows numbers
    larger than the largest 32 bit number to be loaded with li. You should follow
@@ -45,19 +41,12 @@ const int TWO_POW_SEVENTEEN = 131072;    // 2^17
 unsigned write_pass_one(FILE* output, const char* name, char** args, int num_args) {
     if (strcmp(name, "li") == 0) {
         /* YOUR CODE HERE */
-        return 0;
-    } else if (strcmp(name, "lwb") == 0) {
-        /* YOUR CODE HERE */
-        return 0;
-    } else if (strcmp(name, "swb") == 0) {
-        /* YOUR CODE HERE */
-        return 0;
-    } else if (strcmp(name, "sos") == 0) {
-        /* YOUR CODE HERE */
-        return 0;
-    } else if (strcmp(name, "rsf") == 0) {
-        /* YOUR CODE HERE */
-        return 0;
+    } else if (strcmp(name, "pi") == 0) {
+    	/* YOUR CODE HERE */
+    } else if (strcmp(name, "neg") == 0) {
+    	/* YOUR CODE HERE */
+    } else if (strcmp(name, "mfhilo") == 0) {
+    	/* YOUR CODE HERE */
     }
     write_inst_string(output, name, args, num_args);
     return 1;
@@ -87,12 +76,33 @@ unsigned write_pass_one(FILE* output, const char* name, char** args, int num_arg
  */
 int translate_inst(FILE* output, const char* name, char** args, size_t num_args, uint32_t addr,
     SymbolTable* symtbl, SymbolTable* reltbl) {
+    // R-type instructions:
     if (strcmp(name, "addu") == 0)       return write_rtype (0x21, output, args, num_args);
     else if (strcmp(name, "or") == 0)    return write_rtype (0x25, output, args, num_args);
     else if (strcmp(name, "slt") == 0)   return write_rtype (0x2a, output, args, num_args);
     else if (strcmp(name, "sltu") == 0)  return write_rtype (0x2b, output, args, num_args);
+    else if (strcmp(name, "xor") == 0)   return write_rtype (0x26, output, args, num_args);
+    else if (strcmp(name, "mult") == 0)  return write_mult_div (0x18, output, args, num_args);
+    else if (strcmp(name, "div") == 0)   return write_mult_div (0x1A, output, args, num_args);
+    else if (strcmp(name, "mfhi") == 0)  return write_mfhi_mflo (0x10, output, args, num_args);
+    else if (strcmp(name, "mflo") == 0)  return write_mfhi_mflo (0x12, output, args, num_args);
+    else if (strcmp(name, "jr") == 0)    return write_jr    (0x08, output, args, num_args);
     else if (strcmp(name, "sll") == 0)   return write_shift (0x00, output, args, num_args);
-    /* YOUR CODE HERE */
+    // I-type instructions:
+    else if (strcmp(name, "addiu") == 0) return write_addiu (0x09, output, args, num_args);
+    else if (strcmp(name, "ori") == 0)   return write_ori   (0x0d, output, args, num_args);
+    else if (strcmp(name, "xori") == 0)  return write_xori  (0x0e, output, args, num_args);
+    else if (strcmp(name, "lui") == 0)   return write_lui   (0x0f, output, args, num_args);
+    else if (strcmp(name, "lb") == 0)    return write_mem   (0x20, output, args, num_args);
+    else if (strcmp(name, "lbu") == 0)   return write_mem   (0x24, output, args, num_args);
+    else if (strcmp(name, "lw") == 0)    return write_mem   (0x23, output, args, num_args);
+    else if (strcmp(name, "sb") == 0)    return write_mem   (0x28, output, args, num_args);
+    else if (strcmp(name, "sw") == 0)    return write_mem   (0x2b, output, args, num_args);
+    else if (strcmp(name, "beq") == 0)   return write_branch(0x04, output, args, num_args, addr, symtbl);
+    else if (strcmp(name, "bne") == 0)   return write_branch(0x05, output, args, num_args, addr, symtbl);
+    // J-type instructions:
+    else if (strcmp(name, "j") == 0)     return write_jump  (0x02, output, args, num_args, addr, reltbl);
+    else if (strcmp(name, "jal") == 0)   return write_jump  (0x03, output, args, num_args, addr, reltbl);
     else                                 return -1;
 }
 
@@ -100,17 +110,17 @@ int translate_inst(FILE* output, const char* name, char** args, size_t num_args,
    translate_reg() to parse registers and write_inst_hex() to write to
    OUTPUT. Both are defined in translate_utils.h.
 
-   This function is INCOMPLETE. Complete the implementation below. You will
-   find bitwise operations to be the cleanest way to complete this function.
+   This function is INCOMPLETE. Complete the implementation below. It may
+   be helpful to use one of the create_instr_*() functions you already implemented.
  */
 int write_rtype(uint8_t funct, FILE* output, char** args, size_t num_args) {
-    // Perhaps perform some error checking?
+    /* PERFORM ERROR CHECKING */
 
     int rd = translate_reg(args[0]);
     int rs = translate_reg(args[1]);
     int rt = translate_reg(args[2]);
 
-    uint32_t instruction = 0;
+    uint32_t instruction = 0; /* FILL IN ACTUAL INSTRUCTION */
     write_inst_hex(output, instruction);
     return 0;
 }
@@ -119,18 +129,18 @@ int write_rtype(uint8_t funct, FILE* output, char** args, size_t num_args) {
    translate_num() to parse numerical arguments. translate_num() is defined
    in translate_utils.h.
 
-   This function is INCOMPLETE. Complete the implementation below. You will
-   find bitwise operations to be the cleanest way to complete this function.
+   This function is INCOMPLETE. Complete the implementation below. It may be helpful to use
+   one of the create_instr_*() functions that you already implemented.
  */
 int write_shift(uint8_t funct, FILE* output, char** args, size_t num_args) {
-	// Perhaps perform some error checking?
+    /* PERFORM ERROR CHECKING */
 
     long int shamt;
     int rd = translate_reg(args[0]);
     int rt = translate_reg(args[1]);
     int err = translate_num(&shamt, args[2], 0, 31);
 
-    uint32_t instruction = 0;
+    uint32_t instruction = 0; /* FILL IN ACTUAL INSTRUCTION */
     write_inst_hex(output, instruction);
     return 0;
 }
@@ -138,94 +148,149 @@ int write_shift(uint8_t funct, FILE* output, char** args, size_t num_args) {
 /* The rest of your write_*() functions below */
 
 int write_jr(uint8_t funct, FILE* output, char** args, size_t num_args) {
-    // Perhaps perform some error checking?
+    /* PERFORM ERROR CHECKING */
 
     int rs = translate_reg(args[0]);
 
-    uint32_t instruction = 0;
+    uint32_t instruction = 0; /* FILL IN ACTUAL INSTRUCTION */
+    write_inst_hex(output, instruction);
+    return 0;
+}
+
+int write_mult_div(uint8_t funct, FILE* output, char** args, size_t num_args) {
+    /* PERFORM ERROR CHECKING */
+
+    int rs = translate_reg(args[0]);
+    int rt = translate_reg(args[1]);
+    
+    uint32_t instruction = 0; /* FILL IN ACTUAL INSTRUCTION */
+    write_inst_hex(output, instruction);
+    return 0;
+}
+
+int write_mfhi_mflo(uint8_t funct, FILE* output, char** args, size_t num_args) {
+    /* PERFORM ERROR CHECKING */ 
+
+    int rd = translate_reg(args[0]);
+
+    uint32_t instruction = 0; /* FILL IN ACTUAL INSTRUCTION */
     write_inst_hex(output, instruction);
     return 0;
 }
 
 int write_addiu(uint8_t opcode, FILE* output, char** args, size_t num_args) {
-    // Perhaps perform some error checking?
+    /* PERFORM ERROR CHECKING */
 
     long int imm;
     int rt = translate_reg(args[0]);
     int rs = translate_reg(args[1]);
     int err = translate_num(&imm, args[2], INT16_MIN, INT16_MAX);
 
-
-    uint32_t instruction = 0;
+    uint32_t instruction = 0; /* FILL IN ACTUAL INSTRUCTION */
     write_inst_hex(output, instruction);
     return 0;
 }
 
 int write_ori(uint8_t opcode, FILE* output, char** args, size_t num_args) {
-    // Perhaps perform some error checking?
+    /* PERFORM ERROR CHECKING */
 
     long int imm;
     int rt = translate_reg(args[0]);
     int rs = translate_reg(args[1]);
     int err = translate_num(&imm, args[2], 0, UINT16_MAX);
 
-    uint32_t instruction = 0;
+    uint32_t instruction = 0; /* FILL IN ACTUAL INSTRUCTION */
+    write_inst_hex(output, instruction);
+    return 0;
+}
+
+int write_xori(uint8_t opcode, FILE* output, char** args, size_t num_args) {
+    /* PERFORM ERROR CHECKING */
+
+    long int imm;
+    int rt = translate_reg(args[0]);
+    int rs = translate_reg(args[1]);
+    int err = translate_num(&imm, args[2], 0, UINT16_MAX);
+
+    uint32_t instruction = 0; /* FILL IN ACTUAL INSTRUCTION */
     write_inst_hex(output, instruction);
     return 0;
 }
 
 int write_lui(uint8_t opcode, FILE* output, char** args, size_t num_args) {
-    // Perhaps perform some error checking?
+    /* PERFORM ERROR CHECKING */
 
     long int imm;
     int rt = translate_reg(args[0]);
     int err = translate_num(&imm, args[1], 0, UINT16_MAX);
 
-    uint32_t instruction = 0;
+    uint32_t instruction = 0; /* FILL IN ACTUAL INSTRUCTION */ 
     write_inst_hex(output, instruction);
     return 0;
 }
 
 int write_mem(uint8_t opcode, FILE* output, char** args, size_t num_args) {
-    // Perhaps perform some error checking?
+    /* PERFORM ERROR CHECKING */
 
     long int imm;
     int rt = translate_reg(args[0]);
     int rs = translate_reg(args[2]);
     int err = translate_num(&imm, args[1], INT16_MIN, INT16_MAX);
 
-    uint32_t instruction =0;
+    uint32_t instruction = 0; /* FILL IN ACTUAL INSTRUCTION */
     write_inst_hex(output, instruction);
     return 0;
 }
 
-/*  A helper function to determine if a destination address
-    can be branched to
+/* Complete the functiion below. You are given an the address in which you
+   are branching from (src_addr), as well as the address in which you are branching to (dest_addr),
+   and you should return whether or not it is possible to branch from src_addr to dest_addr.
+
+   HINT: The constant defined at the top of this file may be useful.
 */
+
 static int can_branch_to(uint32_t src_addr, uint32_t dest_addr) {
-    int32_t diff = dest_addr - src_addr;
-    return (diff >= 0 && diff <= TWO_POW_SEVENTEEN) || (diff < 0 && diff >= -(TWO_POW_SEVENTEEN - 4));
+   /* YOUR CODE HERE */
 }
 
-
 int write_branch(uint8_t opcode, FILE* output, char** args, size_t num_args, uint32_t addr, SymbolTable* symtbl) {
-    // Perhaps perform some error checking?
+   /* PERFORM ERROR CHECKING */
 
     int rs = translate_reg(args[0]);
     int rt = translate_reg(args[1]);
-    int label_addr = get_addr_for_symbol(symtbl, args[2]);
 
-    //Please compute the branch offset using the MIPS rules.
-    int32_t offset = 0;
-    uint32_t instruction = 0;
+    int label_addr = 0; /* Fill in the actual address for the given label (HINT: use the get_addr_for_symbol() function) */
+
+    if (!can_branch_to(addr, label_addr)) {
+        return -1;
+    }
+  
+    int32_t offset = 0; /* Fill in the actual byte offset between the label and the current address */
+    uint32_t instruction = 0; /* FILL IN ACTUAL INSTRUCTION */
     write_inst_hex(output, instruction);
     return 0;
 }
 
 int write_jump(uint8_t opcode, FILE* output, char** args, size_t num_args, uint32_t addr, SymbolTable* reltbl) {
-    /* YOUR CODE HERE */
+    /* PERFORM ERROR CHECKING */
 
-    uint32_t instruction = 0;
+    int err = add_to_table(reltbl, args[0], addr);
+
+    uint32_t instruction = 0; /* FILL IN ACTUAL INSTRUCTION */
     write_inst_hex(output, instruction);
     return 0;
+}
+
+/* Given the parameters, this function should return the corresponding 32-bit
+   MIPS I-Type instruction. You may find bitwise operators particularly useful. 
+*/
+uint32_t create_instr_i_type(uint8_t opcode, int rs, int rt, int imm) {
+    return 0;  /* YOUR CODE HERE */
+}
+
+/* Given the parameters, this function returns the corresponding 32-bit MIPS R-Type
+   instruction. You may find bitwise operators particularly useful
+*/
+uint32_t create_instr_r_type(int rs, int rt, int rd, int shamt, uint8_t funct) {
+    return 0; /* YOUR CODE HERE */
 }
