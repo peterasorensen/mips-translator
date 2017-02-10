@@ -3,4 +3,4 @@ label1:	li $a1, -6000
 		
 label2:
 		li $a2, 80000
-		li $a3, 0xB0BACAFE
+		li $a3, 0x00BACAFE

@@ -53,10 +53,10 @@ void test_translate_num() {
 
     CU_ASSERT_EQUAL(translate_num(&output, "35", -1000, 1000), 0);
     CU_ASSERT_EQUAL(output, 35);
-    CU_ASSERT_EQUAL(translate_num(&output, "145634236", 0, 9000000000), 0);
-    CU_ASSERT_EQUAL(output, 145634236);
-    CU_ASSERT_EQUAL(translate_num(&output, "0xC0FFEE", -9000000000, 9000000000), 0);
-    CU_ASSERT_EQUAL(output, 12648430);
+    CU_ASSERT_EQUAL(translate_num(&output, "1456", 0, 9000), 0);
+    CU_ASSERT_EQUAL(output, 1456);
+    CU_ASSERT_EQUAL(translate_num(&output, "0x00FFEE", -900000, 900000), 0);
+    CU_ASSERT_EQUAL(output, 65518);
     CU_ASSERT_EQUAL(translate_num(&output, "72", -16, 72), 0);
     CU_ASSERT_EQUAL(output, 72);
     CU_ASSERT_EQUAL(translate_num(&output, "72", -16, 71), -1);

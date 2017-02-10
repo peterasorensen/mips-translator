@@ -22,9 +22,8 @@ const int TWO_POW_SEVENTEEN = 131072;    // 2^17
    valid, since that will be checked in part two.
 
    Also for li:
-    - make sure that the number is representable by 32 bits. (Hint: the number
-        can be both signed or unsigned). You may find the translate_num() function
-        you implemented earlier to be useful here.
+    - make sure that the number is representable by 32 bits (signed).
+        You may find the translate_num() function you implemented earlier to be useful here.
     - if the immediate can fit in the imm field of an addiu instruction, then
         expand li into a single addiu instruction. Otherwise, expand it into
         a lui-ori pair.
