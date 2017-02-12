@@ -152,7 +152,7 @@ int pass_one(FILE* input, FILE* output, SymbolTable* symtbl) {
 
         // Scan for the instruction name. If no name is found, then
         // move to the next line.
-	char *name = strtok(buf, IGNORE_CHARS);
+	char *token = strtok(buf, IGNORE_CHARS);
 
         // Handle Labels. If a label is found, get the next token.
 
