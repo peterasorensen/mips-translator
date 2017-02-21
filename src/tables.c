@@ -61,6 +61,8 @@ SymbolTable* create_table(int mode) {
 /* Frees the given SymbolTable and all associated memory. */
 void free_table(SymbolTable* table) {
     /* YOUR CODE HERE */
+    free(table->tbl);
+    free(table);
 }
 
 /* A suggested helper function for copying the contents of a string. */
@@ -92,7 +94,30 @@ static char* create_copy_of_str(const char* str) {
  */
 int add_to_table(SymbolTable* table, const char* name, uint32_t addr) {
     /* YOUR CODE HERE */
-    return 0;
+    if (addr % 4) {
+        addr_alignment_incorrect();
+        return -1;
+    }
+    else if (get_addr_for_symbol(table,name) == -1 || !table->mode) {
+        int cap = table->cap;
+        int len = table->len;
+        if (cap <= len) {
+            table->tbl = realloc(table->tb1, sizeof(Symbol) * len * SCALING_FACTOR);
+            if (!table->tbl) {
+                allocation_failed();
+            }
+        Symbol newnew;
+        newnew.addr = addr;
+        newnew.name = create_copy_of_str(name);
+        table->tbl[len] = newnew;
+        table -> = len + 1;
+        return 0;
+        }
+    }
+    else {
+        name_already_exists(name);
+        return -1;
+    }
 }
 
 /* Returns the address (byte offset) of the given symbol. If a symbol with name

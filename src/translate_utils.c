@@ -53,9 +53,20 @@ int is_valid_label(const char* str) {
    function returns 0 if the conversion proceeded without errors, or -1 if an 
    error occurred. If an error occurs, do not set the value that OUTPUT points to.
  */
-int translate_num(long int* output, const char* str, long int lower_bound, long int upper_bound) { 
+int translate_num(long int* output, const char* str, long int lower_bound, long int upper_bound) {
     /* YOUR CODE HERE */
-    return 0;
+    if (!str || !output) {
+        return -1;
+    }
+    char *last;
+    long int temporary = strtol(str, &last, 0);
+    if (*last == '\0' && lower_bound <= temporary && upper_bound >= temporary) {
+        *output = temporary;
+        return 0;
+    }
+    else {
+        return -1;
+    }
 }
 
 /* Translates the register name to the corresponding register number. Please

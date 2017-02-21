@@ -37,15 +37,77 @@ const int TWO_POW_SEVENTEEN = 131072;    // 2^17
 
    Returns the number of instructions written (so 0 if there were any errors).
  */
+
+int li32 (char** args) {
+    char* last;
+    long int yaga = strtol(args[1], &last, 0);
+    if (yaga < INT32_MIN || yaga > UINT32_MAX) {
+        return 0;
+    }
+    return 1;
+}
+
+int li_psuedo(char** args, FILE* output) {
+    int error;
+    long int yagaPointa;
+    error = translate_num(&yagaPointa, args[1], INT32_MIN, UINT32_MAX);
+    if (error == TRUE) {
+        return 0;
+    }
+    int teacha = 0;
+    if (yagaPointa < INT16_MIN || yagaPointa > UINT16_MAX) {
+        uint32_t cover = 0x0000ffff;
+        int lui = yagaPointa >> 16;
+        int ori = (yagaPointa << 16) >> 16;
+        lui &= cover;
+        ori &= cover;
+        fprintf(output, "lui $at, %i\n", lui);
+        fprintf(output, "ori %s, $at, %i\n", args[0], ori);
+        teacha += 2;
+
+    } else {
+        fprintf(output, "addiu %s, $0, %li\n", args[0], yagaPointa);
+        teacha += 1;
+    }
+    return teacha;
+}
+
 unsigned write_pass_one(FILE* output, const char* name, char** args, int num_args) {
     if (strcmp(name, "li") == 0) {
         /* YOUR CODE HERE */
+        if (num_args != 2) {
+            return 0;
+        }
+        if (li32(args)) {
+            return li_psuedo(args, output);
+        }
     } else if (strcmp(name, "pi") == 0) {
     	/* YOUR CODE HERE */
+        if (num_args != 3) {
+            return 0;
+        }
+        fprintf(output, "%s %s %s %s\n", "addiu", args[0], "$0", "3");
+        fprintf(output, "%s %s %s %s\n", "addiu", args[1], "$0", "1");
+        fprintf(output, "%s %s %s %s\n", "addiu", args[2], "$0", "4");
+        return 3;
     } else if (strcmp(name, "neg") == 0) {
     	/* YOUR CODE HERE */
+        if (num_args != 2) {
+            return 0;
+        }
+        fprintf(output, "%s %s %s\n", "lui", "$at", "0xFFFF");
+        fprintf(output, "%s %s %s %s\n", "ori", "$at", "$at", "0xFFFF");
+        fprintf(output, "%s %s %s %s\n", "xor", "$at", args[1], "$at");
+        fprintf(output, "%s %s %s %s\n", "addiu", args[0], "$at", "1");
+        return 4;
     } else if (strcmp(name, "mfhilo") == 0) {
     	/* YOUR CODE HERE */
+        if (num_args != 2) {
+            return 0;
+        }
+        fprintf(output, "mfhi %s", args[0]);
+        fprintf(output, "mflo %s", args[1]);
+        return 2;
     }
     write_inst_string(output, name, args, num_args);
     return 1;
