@@ -103,7 +103,7 @@ int add_to_table(SymbolTable* table, const char* name, uint32_t addr) {
         int lengthy = table->len;
         if (cappy <= lengthy) {
             table->tbl = realloc(table->tbl, sizeof(Symbol) * lengthy * SCALING_FACTOR);
-            if (!table->tbl) {
+            if (table->tbl == NULL) {
                 allocation_failed();
             }
             table->cap = SCALING_FACTOR * cappy;

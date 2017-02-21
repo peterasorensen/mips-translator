@@ -139,8 +139,9 @@ static int parse_args(uint32_t input_line, char** args, int* num_args) {
 int pass_one(FILE* input, FILE* output, SymbolTable* symtbl) {
     /* YOUR CODE HERE */
     char buf[BUF_SIZE];
-    uint32_t input_line = 0, byte_offset = 0;
-    int ret_code = 0;
+    uint32_t input_line = 0;
+    uint32_t bytey = 0;
+    int retty = 0;
 
 
      // Read lines and add to instructions
@@ -157,7 +158,7 @@ int pass_one(FILE* input, FILE* output, SymbolTable* symtbl) {
         int post = 0;
         // Handle Labels. If a label is found, get the next token.
         if (token) {
-            if (add_if_label(input_line, token, byte_offset, symtbl)) {
+            if (add_if_label(input_line, token, bytey, symtbl)) {
                 token = strtok(NULL, IGNORE_CHARS);
                 if (token) {
                     post = 1;
@@ -176,17 +177,17 @@ int pass_one(FILE* input, FILE* output, SymbolTable* symtbl) {
                     unsigned int lines_written = write_pass_one(output, token, args, num_args);
                     if (lines_written == 0) {
                         raise_inst_error(input_line, token, args, num_args);
-                        ret_code = -1;
+                        retty = -1;
                     }
-                    byte_offset += lines_written * 4;
+                    bytey += lines_written * 4;
                 }
             }
             else {
-                ret_code = -1;
+                retty = -1;
             }
         }
     }
-    return ret_code;
+    return retty;
 }
 
 /* Reads an intermediate file and translates it into machine code. You may assume:

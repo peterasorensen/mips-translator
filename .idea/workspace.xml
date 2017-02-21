@@ -10,10 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a870cb8-7d60-4bd3-b159-0a020fc4eceb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assembler.exe" afterPath="$PROJECT_DIR$/assembler.exe" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assembler.c" afterPath="$PROJECT_DIR$/assembler.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/translate.c" afterPath="$PROJECT_DIR$/src/translate.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tables.c" afterPath="$PROJECT_DIR$/src/tables.c" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,21 +37,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tables.c" pinned="false" current-in-tab="false">
+      <file leaf-file-name="tables.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tables.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="104" column="43" lean-forward="false" selection-start-line="104" selection-start-column="40" selection-end-line="104" selection-end-column="43" />
+            <state relative-caret-position="623">
+              <caret line="116" column="17" lean-forward="true" selection-start-line="116" selection-start-column="17" selection-end-line="116" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="translate.c" pinned="false" current-in-tab="true">
+      <file leaf-file-name="translate.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/translate.c">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="699">
-              <caret line="489" column="0" lean-forward="true" selection-start-line="489" selection-start-column="0" selection-end-line="489" selection-end-column="0" />
+              <caret line="489" column="0" lean-forward="false" selection-start-line="489" selection-start-column="0" selection-end-line="489" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -72,38 +70,8 @@
       <file leaf-file-name="assembler.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assembler.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="140" column="23" lean-forward="false" selection-start-line="140" selection-start-column="23" selection-end-line="140" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="combined.out" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/out/combined.out">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="combined.int" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/out/combined.int">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="combined.s" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/input/combined.s">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="2116">
+              <caret line="160" column="36" lean-forward="false" selection-start-line="160" selection-start-column="36" selection-end-line="160" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -113,7 +81,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>expansion</find>
       <find>li32</find>
       <find>can_branch_to</find>
       <find>translate_num</find>
@@ -140,16 +107,18 @@
       <find>input_line</find>
       <find>line_num</find>
       <find>has_error</find>
-      <find>byte_offset</find>
       <find>add_to_table</find>
       <find>imm</find>
+      <find>byte_offset</find>
+      <find>ret_code</find>
     </findStrings>
     <replaceStrings>
       <replace>input_line</replace>
       <replace>errored</replace>
-      <replace>bytey</replace>
       <replace>tbl</replace>
       <replace>mmmmm</replace>
+      <replace>bytey</replace>
+      <replace>retty</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -159,10 +128,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/translate_utils.c" />
-        <option value="$PROJECT_DIR$/src/tables.c" />
         <option value="$PROJECT_DIR$/out/pseudo_2.int" />
-        <option value="$PROJECT_DIR$/assembler.c" />
         <option value="$PROJECT_DIR$/src/translate.c" />
+        <option value="$PROJECT_DIR$/assembler.c" />
+        <option value="$PROJECT_DIR$/src/tables.c" />
       </list>
     </option>
   </component>
@@ -425,12 +394,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1487568362500</updated>
-      <workItem from="1487568369088" duration="23691000" />
+      <workItem from="1487568369088" duration="24796000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23691000" />
+    <option name="totallyTimeSpent" value="24796000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="25" y="6" width="937" height="1019" extended-state="0" />
@@ -490,14 +459,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/input/combined.s">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/input/pseudo_2.s">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -514,22 +475,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assembler.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="140" column="23" lean-forward="false" selection-start-line="140" selection-start-column="23" selection-end-line="140" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tables.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="104" column="43" lean-forward="false" selection-start-line="104" selection-start-column="40" selection-end-line="104" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/input/p2_errors.s">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -541,7 +486,31 @@
     <entry file="file://$PROJECT_DIR$/src/translate.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="699">
-          <caret line="489" column="0" lean-forward="true" selection-start-line="489" selection-start-column="0" selection-end-line="489" selection-end-column="0" />
+          <caret line="489" column="0" lean-forward="false" selection-start-line="489" selection-start-column="0" selection-end-line="489" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/input/combined.s">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assembler.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2116">
+          <caret line="160" column="36" lean-forward="false" selection-start-line="160" selection-start-column="36" selection-end-line="160" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tables.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="623">
+          <caret line="116" column="17" lean-forward="true" selection-start-line="116" selection-start-column="17" selection-end-line="116" selection-end-column="17" />
           <folding />
         </state>
       </provider>
