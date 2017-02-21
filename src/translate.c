@@ -51,25 +51,25 @@ int li_psuedo(char** args, FILE* output) {
     int error;
     long int yagaPointa;
     error = translate_num(&yagaPointa, args[1], INT32_MIN, INT32_MAX);
-    if (error) {
-        return 0;
-    }
-    int teacha = 0;
-    if (yagaPointa < INT16_MIN || yagaPointa > INT16_MAX) {
-        uint32_t cover = 0x0000ffff;
-        int lui = yagaPointa >> 16;
-        int ori = (yagaPointa << 16) >> 16;
-        lui &= cover;
-        ori &= cover;
-        fprintf(output, "lui $at %i\n", lui);
-        fprintf(output, "ori %s $at %i\n", args[0], ori);
-        teacha += 2;
+    if (!error) {
+        int teacha = 0;
+        if (yagaPointa < INT16_MIN || yagaPointa > INT16_MAX) {
+            uint32_t cover = 0x0000ffff;
+            int lui = yagaPointa >> 16;
+            int ori = (yagaPointa << 16) >> 16;
+            lui &= cover;
+            ori &= cover;
+            fprintf(output, "lui $at %i\n", lui);
+            fprintf(output, "ori %s $at %i\n", args[0], ori);
+            teacha += 2;
 
-    } else {
-        fprintf(output, "addiu %s $0 %li\n", args[0], yagaPointa);
-        teacha += 1;
+        } else {
+            fprintf(output, "addiu %s $0 %li\n", args[0], yagaPointa);
+            teacha += 1;
+        }
+        return teacha;
     }
-    return teacha;
+    return 0;
 }
 
 unsigned write_pass_one(FILE* output, const char* name, char** args, int num_args) {
@@ -212,10 +212,10 @@ int write_shift(uint8_t funct, FILE* output, char** args, size_t num_args) {
         return -1;
     }
 
-    long int shamt;
+    long int bamfa;
     int rd = translate_reg(args[0]);
     int rt = translate_reg(args[1]);
-    int err = translate_num(&shamt, args[2], 0, 31);
+    int err = translate_num(&bamfa, args[2], 0, 31);
 
     uint32_t instruction = 0;
     /* Cont. if err doesn't result in error. */
@@ -223,7 +223,7 @@ int write_shift(uint8_t funct, FILE* output, char** args, size_t num_args) {
         return -1;
     }
     instruction += funct;
-    instruction += (shamt << 6);
+    instruction += (bamfa << 6);
     instruction += (rd << 11);
     instruction += (rt << 16);
     write_inst_hex(output, instruction);
@@ -297,10 +297,10 @@ int write_addiu(uint8_t opcode, FILE* output, char** args, size_t num_args) {
         return -1;
     }
 
-    long int imm;
+    long int mmmmm;
     int rt = translate_reg(args[0]);
     int rs = translate_reg(args[1]);
-    int err = translate_num(&imm, args[2], INT16_MIN, INT16_MAX);
+    int err = translate_num(&mmmmm, args[2], INT16_MIN, INT16_MAX);
 
     uint32_t instruction = 0;
     /* FILL IN ACTUAL INSTRUCTION */
@@ -308,8 +308,8 @@ int write_addiu(uint8_t opcode, FILE* output, char** args, size_t num_args) {
         return -1;
     }
     uint32_t cover = 0x0000ffff;
-    imm &= cover;
-    instruction += imm;
+    mmmmm &= cover;
+    instruction += mmmmm;
     instruction += (rt << 16);
     instruction += (rs << 21);
     instruction += (opcode << 26);
@@ -323,17 +323,17 @@ int write_ori(uint8_t opcode, FILE* output, char** args, size_t num_args) {
         return -1;
     }
 
-    long int imm;
+    long int mmmmm;
     int rt = translate_reg(args[0]);
     int rs = translate_reg(args[1]);
-    int err = translate_num(&imm, args[2], 0, UINT16_MAX);
+    int err = translate_num(&mmmmm, args[2], 0, UINT16_MAX);
 
     uint32_t instruction = 0;
     /* FILL IN ACTUAL INSTRUCTION */
     if (err == -1 || rs == -1 || rt == -1) {
         return -1;
     }
-    instruction += imm;
+    instruction += mmmmm;
     instruction += (rt << 16);
     instruction += (rs << 21);
     instruction += (opcode << 26);
@@ -347,17 +347,17 @@ int write_xori(uint8_t opcode, FILE* output, char** args, size_t num_args) {
         return -1;
     }
 
-    long int imm;
+    long int mmmmm;
     int rt = translate_reg(args[0]);
     int rs = translate_reg(args[1]);
-    int err = translate_num(&imm, args[2], 0, UINT16_MAX);
+    int err = translate_num(&mmmmm, args[2], 0, UINT16_MAX);
 
     uint32_t instruction = 0;
     /* FILL IN ACTUAL INSTRUCTION */
     if (rt == -1 || rs == -1 || err == -1) {
         return -1;
     }
-    instruction += imm;
+    instruction += mmmmm;
     instruction += (rt << 16);
     instruction += (rs << 21);
     instruction += (opcode << 26);
@@ -371,16 +371,16 @@ int write_lui(uint8_t opcode, FILE* output, char** args, size_t num_args) {
         return -1;
     }
 
-    long int imm;
+    long int mmmmm;
     int rt = translate_reg(args[0]);
-    int err = translate_num(&imm, args[1], 0, UINT16_MAX);
+    int err = translate_num(&mmmmm, args[1], 0, UINT16_MAX);
 
     uint32_t instruction = 0;
     /* FILL IN ACTUAL INSTRUCTION */
     if (err == -1 || rt == -1) {
         return -1;
     }
-    instruction += imm;
+    instruction += mmmmm;
     instruction += (rt << 16);
     instruction += (opcode << 26);
     write_inst_hex(output, instruction);
@@ -393,10 +393,10 @@ int write_mem(uint8_t opcode, FILE* output, char** args, size_t num_args) {
         return -1;
     }
 
-    long int imm;
+    long int mmmmm;
     int rt = translate_reg(args[0]);
     int rs = translate_reg(args[2]);
-    int err = translate_num(&imm, args[1], INT16_MIN, INT16_MAX);
+    int err = translate_num(&mmmmm, args[1], INT16_MIN, INT16_MAX);
 
     uint32_t instruction = 0;
     /* FILL IN ACTUAL INSTRUCTION */
@@ -404,8 +404,8 @@ int write_mem(uint8_t opcode, FILE* output, char** args, size_t num_args) {
         return -1;
     }
     uint32_t cover = 0x0000ffff;
-    imm &= cover;
-    instruction += imm;
+    mmmmm &= cover;
+    instruction += mmmmm;
     instruction += (rt << 16);
     instruction += (rs << 21);
     instruction += (opcode << 26);
@@ -423,7 +423,7 @@ int write_mem(uint8_t opcode, FILE* output, char** args, size_t num_args) {
 static int can_branch_to(uint32_t src_addr, uint32_t dest_addr) {
    /* YOUR CODE HERE */
     int32_t difference = dest_addr - src_addr;
-    return (0 <= difference && TWO_POW_SEVENTEEN >= difference) ||
+    return (!(0 > difference || TWO_POW_SEVENTEEN < difference)) ||
             (0 > difference && difference >= -(TWO_POW_SEVENTEEN - 4));
 }
 
@@ -445,8 +445,8 @@ int write_branch(uint8_t opcode, FILE* output, char** args, size_t num_args, uin
   
     int32_t offset = (int32_t)(label_addr - (addr + 4)) / 4; /* Fill in the actual byte offset between the label and the current address */
     uint32_t instruction = 0;
-    uint32_t mask = 0x0000ffff;
-    offset &= mask;
+    uint32_t cover = 0x0000ffff;
+    offset &= cover;
     /* FILL IN ACTUAL INSTRUCTION */
     instruction += offset;
     instruction += (rt << 16);
@@ -462,7 +462,7 @@ int write_jump(uint8_t opcode, FILE* output, char** args, size_t num_args, uint3
         return -1;
     }
 
-    int err = add_to_table(reltbl, args[0], addr);
+    add_to_table(reltbl, args[0], addr);
 
     int addraddr = 0;
     uint32_t instruction = 0; /* FILL IN ACTUAL INSTRUCTION */
@@ -477,7 +477,7 @@ int write_jump(uint8_t opcode, FILE* output, char** args, size_t num_args, uint3
 /* Given the parameters, this function should return the corresponding 32-bit
    MIPS I-Type instruction. You may find bitwise operators particularly useful. 
 */
-uint32_t create_instr_i_type(uint8_t opcode, int rs, int rt, int imm) {
+uint32_t create_instr_i_type(uint8_t opcode, int rs, int rt, int mmmmm) {
     return 0;  /* YOUR CODE HERE */
 }
 

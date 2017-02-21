@@ -206,13 +206,12 @@ int pass_two(FILE *input, FILE* output, SymbolTable* symtbl, SymbolTable* reltbl
     /* Store input line number / byte offset. When should each be incremented? */
     uint32_t input_line = 0;
     int ret_code = 0;
-    int line_num = 0;
-    int byte_offset = 0;
-    int has_error = 0;
+    int bytey = 0;
+    int errored = 0;
 
     /* First, read the next line into a buffer. */
     while (fgets(buf, BUF_SIZE, input)) {
-        line_num++;
+        input_line++;
 
         /* Next, use strtok() to scan for next character.*/
         char* name = strtok(buf, IGNORE_CHARS);
@@ -224,29 +223,29 @@ int pass_two(FILE *input, FILE* output, SymbolTable* symtbl, SymbolTable* reltbl
            the rest of the line. Extra arguments should be filtered out in pass_one(),
            so you don't need to worry about that here. */
             char* args[MAX_ARGS];
-            int num_args = 0;
-            int parser = parse_args(line_num, args, &num_args);
-            has_error = has_error + parser;
-            int inst = translate_inst(output, name, args, num_args, byte_offset, symtbl, reltbl);
+            int erx = 0;
+            int parser = parse_args(input_line, args, &erx);
+            errored = errored + parser;
+            int inst = translate_inst(output, name, args, erx, bytey, symtbl, reltbl);
 
             if (inst == -1) {
-                raise_inst_error(line_num, name, args, num_args);
+                raise_inst_error(input_line, name, args, erx);
             }
 
-            has_error = has_error + inst;
+            errored = errored + inst;
 
             // Repeat until no more characters are left, and the return the correct return val
-            byte_offset += 4;
+            bytey += 4;
         }
 
 
     }
 
 
-    if (!has_error) {
-        return 0;
+    if (errored) {
+        ret_code = -1;
     }
-    return -1;
+    return ret_code;
 }
 
 /*******************************

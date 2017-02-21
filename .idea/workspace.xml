@@ -10,6 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a870cb8-7d60-4bd3-b159-0a020fc4eceb" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assembler.exe" afterPath="$PROJECT_DIR$/assembler.exe" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assembler.c" afterPath="$PROJECT_DIR$/assembler.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/translate.c" afterPath="$PROJECT_DIR$/src/translate.c" />
@@ -51,15 +52,15 @@
       <file leaf-file-name="translate.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/translate.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="255" column="21" lean-forward="false" selection-start-line="255" selection-start-column="21" selection-end-line="255" selection-end-column="21" />
+            <state relative-caret-position="699">
+              <caret line="489" column="0" lean-forward="true" selection-start-line="489" selection-start-column="0" selection-end-line="489" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pseudo_2.s" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/input/pseudo_2.s">
+      <file leaf-file-name="p2_errors.s" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/input/p2_errors.s">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -68,21 +69,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pseudo_2.int" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/out/pseudo_2.int">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="9" column="12" lean-forward="true" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="assembler.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assembler.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="109" column="9" lean-forward="true" selection-start-line="109" selection-start-column="9" selection-end-line="109" selection-end-column="9" />
+            <state relative-caret-position="103">
+              <caret line="140" column="23" lean-forward="false" selection-start-line="140" selection-start-column="23" selection-end-line="140" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -122,7 +113,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>YOUR CODE</find>
       <find>expansion</find>
       <find>li32</find>
       <find>can_branch_to</find>
@@ -138,20 +128,28 @@
       <find>jr</find>
       <find>or</find>
       <find>````</find>
-      <find>byte_offset</find>
       <find>write_mult</find>
       <find>write_mult_div</find>
-      <find>input_line</find>
       <find>post_label</find>
       <find>li</find>
       <find>psuedo</find>
       <find>pass_one</find>
-      <find>pass_two</find>
       <find>write_pass</find>
       <find>mult</find>
+      <find>pass_two</find>
+      <find>input_line</find>
+      <find>line_num</find>
+      <find>has_error</find>
+      <find>byte_offset</find>
+      <find>add_to_table</find>
+      <find>imm</find>
     </findStrings>
     <replaceStrings>
+      <replace>input_line</replace>
+      <replace>errored</replace>
+      <replace>bytey</replace>
       <replace>tbl</replace>
+      <replace>mmmmm</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -162,8 +160,8 @@
       <list>
         <option value="$PROJECT_DIR$/src/translate_utils.c" />
         <option value="$PROJECT_DIR$/src/tables.c" />
-        <option value="$PROJECT_DIR$/assembler.c" />
         <option value="$PROJECT_DIR$/out/pseudo_2.int" />
+        <option value="$PROJECT_DIR$/assembler.c" />
         <option value="$PROJECT_DIR$/src/translate.c" />
       </list>
     </option>
@@ -232,6 +230,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="out" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="proj2-axk" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="proj2-axk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="input" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -413,12 +425,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1487568362500</updated>
-      <workItem from="1487568369088" duration="21937000" />
+      <workItem from="1487568369088" duration="23691000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21937000" />
+    <option name="totallyTimeSpent" value="23691000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="25" y="6" width="937" height="1019" extended-state="0" />
@@ -462,14 +474,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tables.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="104" column="43" lean-forward="false" selection-start-line="104" selection-start-column="40" selection-end-line="104" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/out/combined.out">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -494,14 +498,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assembler.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="109" column="9" lean-forward="true" selection-start-line="109" selection-start-column="9" selection-end-line="109" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/input/pseudo_2.s">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -518,10 +514,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/assembler.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="140" column="23" lean-forward="false" selection-start-line="140" selection-start-column="23" selection-end-line="140" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tables.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="104" column="43" lean-forward="false" selection-start-line="104" selection-start-column="40" selection-end-line="104" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/input/p2_errors.s">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/translate.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="255" column="21" lean-forward="false" selection-start-line="255" selection-start-column="21" selection-end-line="255" selection-end-column="21" />
+        <state relative-caret-position="699">
+          <caret line="489" column="0" lean-forward="true" selection-start-line="489" selection-start-column="0" selection-end-line="489" selection-end-column="0" />
           <folding />
         </state>
       </provider>
