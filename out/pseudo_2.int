@@ -1,0 +1,16 @@
+lui $at 291
+ori $t0 $at 17767
+addiu $s0 $0 3
+addiu $t1 $0 1
+addiu $t3 $0 4
+lui $at 0xFFFF
+ori $at $at 0xFFFF
+xor $at $t0 $at
+addiu $t2 $at 1
+mult $s0 $t1
+mfhi $s1
+mflo $s2
+lui $at 0xFFFF
+ori $at $at 0xFFFF
+xor $at $s0 $at
+addiu $a0 $at 1
