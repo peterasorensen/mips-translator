@@ -99,21 +99,23 @@ int add_to_table(SymbolTable* table, const char* name, uint32_t addr) {
         return -1;
     }
     else if (get_addr_for_symbol(table,name) == -1 || !table->mode) {
-        int cap = table->cap;
-        int len = table->len;
-        if (cap <= len) {
-            table->tbl = realloc(table->tb1, sizeof(Symbol) * len * SCALING_FACTOR);
+        int cappy = table->cap;
+        int lengthy = table->len;
+        if (cappy <= lengthy) {
+            table->tbl = realloc(table->tbl, sizeof(Symbol) * lengthy * SCALING_FACTOR);
             if (!table->tbl) {
                 allocation_failed();
             }
+            table->cap = SCALING_FACTOR * cappy;
+            table->len = SCALING_FACTOR * lengthy;
+        }
         Symbol newnew;
         newnew.addr = addr;
         newnew.name = create_copy_of_str(name);
-        table->tbl[len] = newnew;
-        table -> = len + 1;
+        table->tbl[lengthy] = newnew;
+        table -> len = lengthy + 1;
         return 0;
         }
-    }
     else {
         name_already_exists(name);
         return -1;
