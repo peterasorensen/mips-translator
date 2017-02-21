@@ -51,7 +51,7 @@ int li_psuedo(char** args, FILE* output) {
     int error;
     long int yagaPointa;
     error = translate_num(&yagaPointa, args[1], INT32_MIN, UINT32_MAX);
-    if (error == TRUE) {
+    if (error) {
         return 0;
     }
     int teacha = 0;
