@@ -10,7 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a870cb8-7d60-4bd3-b159-0a020fc4eceb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assembler.c" afterPath="$PROJECT_DIR$/assembler.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tables.c" afterPath="$PROJECT_DIR$/src/tables.c" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -40,8 +39,8 @@
       <file leaf-file-name="tables.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tables.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="623">
-              <caret line="116" column="17" lean-forward="true" selection-start-line="116" selection-start-column="17" selection-end-line="116" selection-end-column="17" />
+            <state relative-caret-position="270">
+              <caret line="113" column="29" lean-forward="false" selection-start-line="113" selection-start-column="29" selection-end-line="113" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -70,8 +69,8 @@
       <file leaf-file-name="assembler.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assembler.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2116">
-              <caret line="160" column="36" lean-forward="false" selection-start-line="160" selection-start-column="36" selection-end-line="160" selection-end-column="36" />
+            <state relative-caret-position="-51">
+              <caret line="138" column="12" lean-forward="false" selection-start-line="138" selection-start-column="4" selection-end-line="138" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -86,7 +85,6 @@
       <find>translate_num</find>
       <find>unit</find>
       <find>create_</find>
-      <find>create_copy_of</find>
       <find>create</find>
       <find>pseudo</find>
       <find>udo</find>
@@ -100,7 +98,6 @@
       <find>post_label</find>
       <find>li</find>
       <find>psuedo</find>
-      <find>pass_one</find>
       <find>write_pass</find>
       <find>mult</find>
       <find>pass_two</find>
@@ -111,6 +108,8 @@
       <find>imm</find>
       <find>byte_offset</find>
       <find>ret_code</find>
+      <find>pass_one</find>
+      <find>create_copy_of</find>
     </findStrings>
     <replaceStrings>
       <replace>input_line</replace>
@@ -394,12 +393,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1487568362500</updated>
-      <workItem from="1487568369088" duration="24796000" />
+      <workItem from="1487568369088" duration="25846000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24796000" />
+    <option name="totallyTimeSpent" value="25846000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="25" y="6" width="937" height="1019" extended-state="0" />
@@ -501,16 +500,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assembler.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2116">
-          <caret line="160" column="36" lean-forward="false" selection-start-line="160" selection-start-column="36" selection-end-line="160" selection-end-column="36" />
+        <state relative-caret-position="-51">
+          <caret line="138" column="12" lean-forward="false" selection-start-line="138" selection-start-column="4" selection-end-line="138" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tables.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="623">
-          <caret line="116" column="17" lean-forward="true" selection-start-line="116" selection-start-column="17" selection-end-line="116" selection-end-column="17" />
+        <state relative-caret-position="270">
+          <caret line="113" column="29" lean-forward="false" selection-start-line="113" selection-start-column="29" selection-end-line="113" selection-end-column="29" />
           <folding />
         </state>
       </provider>

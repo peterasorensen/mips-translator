@@ -98,7 +98,7 @@ int add_to_table(SymbolTable* table, const char* name, uint32_t addr) {
         addr_alignment_incorrect();
         return -1;
     }
-    else if (get_addr_for_symbol(table,name) == -1 || !table->mode) {
+    else if (get_addr_for_symbol(table, name) == -1 || !table->mode) {
         int cappy = table->cap;
         int lengthy = table->len;
         if (cappy <= lengthy) {
@@ -110,8 +110,9 @@ int add_to_table(SymbolTable* table, const char* name, uint32_t addr) {
             table->len = SCALING_FACTOR * lengthy;
         }
         Symbol newnew;
+        char* yummmmy = create_copy_of_str(name);
+        newnew.name = yummmmy;
         newnew.addr = addr;
-        newnew.name = create_copy_of_str(name);
         table->tbl[lengthy] = newnew;
         table -> len = lengthy + 1;
         return 0;
